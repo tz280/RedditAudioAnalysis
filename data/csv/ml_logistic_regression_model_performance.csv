@@ -1,0 +1,30 @@
+LOGISTIC REGRESSION MODEL PERFORMANCE REPORT
+============================================================
+
+DATASET INFORMATION
+------------------------------------------------------------
+Dataset_Metric,Value
+Total Samples,8461209
+Training Samples,6767748
+Test Samples,1693461
+Training Percentage,80.0%
+Test Percentage,20.0%
+
+PER-CLASS PERFORMANCE METRICS
+------------------------------------------------------------
+Class,Precision,Recall,F1-Score,Support
+Negative,0.46896334749095486,0.14154132482528106,0.21745187713808473,105312
+Neutral,0.8714243465739094,0.9604390566359604,0.9137689806854747,1313088
+Positive,0.7955590372007573,0.6202769567477759,0.6970679381188473,275061
+
+OVERALL PERFORMANCE METRICS
+------------------------------------------------------------
+Metric,Value
+Overall Accuracy,0.854262956159014
+Macro Avg Precision,0.7119822437552071
+Macro Avg Recall,0.5740857794030058
+Macro Avg F1-Score,0.6094295986474689
+Weighted Avg Precision,0.8340738787468306
+Weighted Avg Recall,0.854262956159014
+Weighted Avg F1-Score,0.8352690611253539
+

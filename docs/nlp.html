@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>DSAN 6000 Big Data Project – Natural Language Processing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DSAN 6000 Big Data Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html"> 
+<span class="menu-text">EDA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./nlp.html" aria-current="page"> 
+<span class="menu-text">NLP</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ml.html"> 
+<span class="menu-text">ML</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./conclusion.html"> 
+<span class="menu-text">Conclusion</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#business-question-1-what-features-pain-points-brands-and-sentiments-are-most-discussed-about-wireless-earbuds-on-reddit" id="toc-business-question-1-what-features-pain-points-brands-and-sentiments-are-most-discussed-about-wireless-earbuds-on-reddit" class="nav-link" data-scroll-target="#business-question-1-what-features-pain-points-brands-and-sentiments-are-most-discussed-about-wireless-earbuds-on-reddit">Business Question 1: What features (pain points &amp; brands) and sentiments are most discussed about wireless earbuds on Reddit?</a>
+  <ul class="collapse">
+  <li><a href="#feature-focus-pain-points" id="toc-feature-focus-pain-points" class="nav-link" data-scroll-target="#feature-focus-pain-points">Feature Focus &amp; Pain Points</a></li>
+  <li><a href="#sentiment-overview" id="toc-sentiment-overview" class="nav-link" data-scroll-target="#sentiment-overview">Sentiment Overview</a></li>
+  <li><a href="#brand-analysis" id="toc-brand-analysis" class="nav-link" data-scroll-target="#brand-analysis">Brand Analysis</a></li>
+  </ul></li>
+  <li><a href="#business-question-2-what-earbud-brand-dominates-controversial-discussion-in-reddit" id="toc-business-question-2-what-earbud-brand-dominates-controversial-discussion-in-reddit" class="nav-link" data-scroll-target="#business-question-2-what-earbud-brand-dominates-controversial-discussion-in-reddit">Business Question 2: What earbud brand dominates controversial discussion in reddit?</a>
+  <ul class="collapse">
+  <li><a href="#brand-discussion" id="toc-brand-discussion" class="nav-link" data-scroll-target="#brand-discussion">brand discussion</a></li>
+  <li><a href="#concern-features" id="toc-concern-features" class="nav-link" data-scroll-target="#concern-features">Concern &amp; Features</a></li>
+  </ul></li>
+  <li><a href="#business-question-3-what-emotional-reactions-do-reddit-users-express-toward-different-earbud-features" id="toc-business-question-3-what-emotional-reactions-do-reddit-users-express-toward-different-earbud-features" class="nav-link" data-scroll-target="#business-question-3-what-emotional-reactions-do-reddit-users-express-toward-different-earbud-features">Business Question 3: What emotional reactions do Reddit users express toward different earbud features?</a>
+  <ul class="collapse">
+  <li><a href="#top-pain-points-by-negative-mentions" id="toc-top-pain-points-by-negative-mentions" class="nav-link" data-scroll-target="#top-pain-points-by-negative-mentions">Top Pain Points by Negative Mentions</a></li>
+  <li><a href="#key-emotional-drivers" id="toc-key-emotional-drivers" class="nav-link" data-scroll-target="#key-emotional-drivers">Key Emotional Drivers</a></li>
+  <li><a href="#key-insights-interpretation" id="toc-key-insights-interpretation" class="nav-link" data-scroll-target="#key-insights-interpretation">Key Insights &amp; Interpretation</a></li>
+  <li><a href="#overall-insights-business-takeaways" id="toc-overall-insights-business-takeaways" class="nav-link" data-scroll-target="#overall-insights-business-takeaways">Overall Insights &amp; Business Takeaways</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  <li><a href="#business-question-4-how-did-public-sentiment-respond-to-the-airpods-pro-usb-c-launch" id="toc-business-question-4-how-did-public-sentiment-respond-to-the-airpods-pro-usb-c-launch" class="nav-link" data-scroll-target="#business-question-4-how-did-public-sentiment-respond-to-the-airpods-pro-usb-c-launch">Business Question 4: How Did Public Sentiment Respond to the AirPods Pro USB-C Launch?</a>
+  <ul class="collapse">
+  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a></li>
+  </ul></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a>
+  <ul class="collapse">
+  <li><a href="#answers-to-nlp-business-questions" id="toc-answers-to-nlp-business-questions" class="nav-link" data-scroll-target="#answers-to-nlp-business-questions">Answers to NLP Business Questions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Natural Language Processing</h1>
+<p class="subtitle lead">Sentiment Analysis and Topic Modeling</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This page presents NLP analysis addressing 4 NLP business questions through sentiment analysis, topic modeling, and text mining.</p>
+</section>
+<section id="business-question-1-what-features-pain-points-brands-and-sentiments-are-most-discussed-about-wireless-earbuds-on-reddit" class="level2">
+<h2 class="anchored" data-anchor-id="business-question-1-what-features-pain-points-brands-and-sentiments-are-most-discussed-about-wireless-earbuds-on-reddit">Business Question 1: What features (pain points &amp; brands) and sentiments are most discussed about wireless earbuds on Reddit?</h2>
+<p><strong>Question:</strong> What are Reddit users most concerned about regarding wireless earbuds, and which aspects show the strongest positive or negative sentiment?</p>
+<hr>
+<section id="feature-focus-pain-points" class="level3">
+<h3 class="anchored" data-anchor-id="feature-focus-pain-points">Feature Focus &amp; Pain Points</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/plots/nlp_feature_mentions.png" class="img-fluid figure-img"></p>
+<figcaption>feature_mentions</figcaption>
+</figure>
+</div>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>The most discussed features are <strong>sound quality (98K mentions)</strong>, <strong>price (108K)</strong>, <strong>battery (73K)</strong>, and <strong>ANC (73K)</strong>.</li>
+<li>Users pay close attention to <strong>comfort (59K)</strong> and <strong>durability (65K)</strong>, showing that both usability and product lifespan are major topics.</li>
+<li>Lesser-discussed but meaningful aspects include <strong>app performance</strong>, <strong>touch controls</strong>, and <strong>transparency mode</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="sentiment-overview" class="level3">
+<h3 class="anchored" data-anchor-id="sentiment-overview">Sentiment Overview</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/plots/nlp_pain_points_vader.png" class="img-fluid figure-img"></p>
+<figcaption>pain_points_vader</figcaption>
+</figure>
+</div>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>Sentiment is <strong>moderately positive overall</strong>, with most features scoring between <strong>+0.3 to +0.5</strong> using VADER.</li>
+<li><strong>Sound quality (+0.57)</strong> and <strong>comfort (+0.52)</strong> received the highest sentiment scores, indicating strong satisfaction.</li>
+<li><strong>Durability (+0.27)</strong>, <strong>battery (+0.29)</strong>, and <strong>app (+0.30)</strong> are key <strong>pain points</strong>, often related to short lifespan, battery degradation, and buggy software.</li>
+<li><strong>Durability</strong>, <strong>battery</strong>, and <strong>price</strong> have the <strong>highest estimated negative mentions</strong> (&gt;10K each), showing consistent user frustration.</li>
+</ul>
+<hr>
+</section>
+<section id="brand-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="brand-analysis">Brand Analysis</h3>
+<p><strong>Findings:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 20%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Brand</th>
+<th>Total Mentions</th>
+<th>Top Features</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AirPods</td>
+<td>18,705</td>
+<td>ANC (2,876), Price (2,666), Comfort (2,382)</td>
+</tr>
+<tr class="even">
+<td>Sony</td>
+<td>18,207</td>
+<td>ANC (3,276), Price (2,775), Sound Quality (2,566)</td>
+</tr>
+<tr class="odd">
+<td>Bose</td>
+<td>15,379</td>
+<td>ANC (2,854), Comfort (2,527), Price (1,878)</td>
+</tr>
+<tr class="even">
+<td>Jabra</td>
+<td>4,334</td>
+<td>ANC (734), Comfort (698), Price (644)</td>
+</tr>
+<tr class="odd">
+<td>Samsung</td>
+<td>12,767</td>
+<td>Battery (3,264), Price (2,030), ANC (1,608)</td>
+</tr>
+<tr class="even">
+<td>Anker</td>
+<td>1,990</td>
+<td>Price (389), ANC (304), Battery (278)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li><strong>Sony</strong> and <strong>Bose</strong> dominate earbud-related discussions, especially on audiophile forums.</li>
+<li><strong>AirPods</strong> are frequently mentioned but polarizing — praised for convenience, criticized for price.</li>
+<li><strong>Samsung</strong> and <strong>Anker</strong> stand out for perceived value and affordability.</li>
+</ul>
+<hr>
+<p><strong>Summary:</strong> Reddit users primarily focus on <strong>audio performance</strong>, <strong>battery endurance</strong>, and <strong>comfort</strong>, but express the most frustration about <strong>durability</strong>, <strong>app issues</strong>, and <strong>pricing</strong>. Overall sentiment remains positive, indicating strong satisfaction with sound and fit — yet there is room for improvement in longevity and software experience.</p>
+</section>
+</section>
+<section id="business-question-2-what-earbud-brand-dominates-controversial-discussion-in-reddit" class="level2">
+<h2 class="anchored" data-anchor-id="business-question-2-what-earbud-brand-dominates-controversial-discussion-in-reddit">Business Question 2: What earbud brand dominates controversial discussion in reddit?</h2>
+<p><strong>Question:</strong> What earbud brand dominates most on discussion and how does discussion leads to, positive,negative or neutral? what feature and concerns that reddit users are discussing for earbud brands?</p>
+<hr>
+<section id="brand-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="brand-discussion">brand discussion</h3>
+<p><img src="data/plots/nlp_avg_text_length.png" class="img-fluid" alt="text_length"> <img src="data/plots/nlp_sentiment_distribution.png" class="img-fluid" alt="sentiment_distribution"> <img src="data/plots/nlp_posneg_ratio.png" class="img-fluid" alt="pos/neg/neutral"></p>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li><p>Among brands Sennheiser had the longest average text length and apple had shortest average text lengh.</p></li>
+<li><p>among all brands Beats had highest percentage on positive discussion among brands, where samsung had highest percentage on negative discussion.</p></li>
+<li><p>from plots, although sennheiser had longest average discussion among users, its positivity on discussion was one of the highest among brands and samsung on the other hand had quite a large portion on discussion, but it had high portion of negative discussion.</p></li>
+</ul>
+<hr>
+</section>
+<section id="concern-features" class="level3">
+<h3 class="anchored" data-anchor-id="concern-features">Concern &amp; Features</h3>
+<p><img src="data/plots/nlp_problem_vs_feature.png" class="img-fluid" alt="problem_vs_feature"> <img src="data/plots/nlp_feature_heatmap.png" class="img-fluid" alt="feature"> <img src="data/plots/nlp_concern_heatmap.png" class="img-fluid" alt="concern"></p>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li><p>Almost every brand had more discussion on the product’s feature, but samsung had more discussion on problems.</p></li>
+<li><p>For discussion on features, brand differs on feature discussion on reddit. for apple and samsung , discussion was mainly about app connection, which is one of the main reason why people use apple product. For rest of the brands, what is interesting is that most of the discussion was about sound. Since these brands don’t produce device itself, sound could be one of the most important factor to discuss on earbud market.</p></li>
+<li><p>In terms of concerns, issue was the main topic that was dealt in reddit. issue as refers as what can customers can do to handle product’s issue.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="business-question-3-what-emotional-reactions-do-reddit-users-express-toward-different-earbud-features" class="level2">
+<h2 class="anchored" data-anchor-id="business-question-3-what-emotional-reactions-do-reddit-users-express-toward-different-earbud-features">Business Question 3: What emotional reactions do Reddit users express toward different earbud features?</h2>
+<p><strong>Question:</strong> Which features trigger the strongest emotional responses—positive or negative—and how do these emotions differ across the earbud experience?</p>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/plots/nlp_emotion_by_feature_heatmap.png" class="img-fluid figure-img"></p>
+<figcaption>Emotion Pain Points</figcaption>
+</figure>
+</div>
+<section id="top-pain-points-by-negative-mentions" class="level3">
+<h3 class="anchored" data-anchor-id="top-pain-points-by-negative-mentions">Top Pain Points by Negative Mentions</h3>
+</section>
+<section id="key-emotional-drivers" class="level3">
+<h3 class="anchored" data-anchor-id="key-emotional-drivers">Key Emotional Drivers</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 36%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Primary Positive Signal</th>
+<th>Primary Negative Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sound Quality</td>
+<td>Joy</td>
+<td>Mild negativity</td>
+</tr>
+<tr class="even">
+<td>ANC</td>
+<td>Joy</td>
+<td>Low anger</td>
+</tr>
+<tr class="odd">
+<td>Comfort</td>
+<td>Joy</td>
+<td>Low negativity</td>
+</tr>
+<tr class="even">
+<td>Connectivity</td>
+<td>—</td>
+<td><strong>High anger</strong></td>
+</tr>
+<tr class="odd">
+<td>Durability</td>
+<td>—</td>
+<td><strong>Highest negativity</strong></td>
+</tr>
+<tr class="even">
+<td>Battery</td>
+<td>Joy</td>
+<td>Sadness / fatigue</td>
+</tr>
+<tr class="odd">
+<td>Price</td>
+<td>Joy</td>
+<td>Fairness frustration</td>
+</tr>
+<tr class="even">
+<td>Mic Quality</td>
+<td>Joy</td>
+<td>Moderate negativity</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="key-insights-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="key-insights-interpretation">Key Insights &amp; Interpretation</h3>
+<section id="reliability-failures-durability-connectivity-generate-the-strongest-negative-emotions" class="level4">
+<h4 class="anchored" data-anchor-id="reliability-failures-durability-connectivity-generate-the-strongest-negative-emotions">1. Reliability failures (durability, connectivity) generate the strongest negative emotions</h4>
+<ul>
+<li><p><strong>Durability</strong> shows the highest concentration of anger and sadness across all features.</p>
+<ul>
+<li>→ Users feel both immediate frustration (anger) and long-term disappointment (sadness) when earbuds break, degrade, or fail over time.</li>
+</ul></li>
+<li><p><strong>Water Resistance</strong> shows the highe concentrations of anger and sadness across all features.</p></li>
+<li><p><strong>Connectivity</strong> displays elevated anger with relatively low joy.</p>
+<ul>
+<li>→ Bluetooth instability tends to produce acute, high-intensity irritation — a “deal-breaker” emotion.</li>
+</ul></li>
+</ul>
+<p><strong>Implication:</strong> These issues damage brand trust and are likely the top drivers of negative reviews, product returns, and churn. Fixing reliability problems yields outsized UX and retention gains.</p>
+<hr>
+</section>
+<section id="battery-issues-evoke-disappointment-not-rage" class="level4">
+<h4 class="anchored" data-anchor-id="battery-issues-evoke-disappointment-not-rage">2. Battery issues evoke disappointment, not rage</h4>
+<ul>
+<li>Battery-related discussions lean toward sadness over anger, signaling a softer but still negative emotional tone.
+<ul>
+<li>→ Users don’t feel blindsided — instead they feel let down, especially when batteries age sooner than expected.</li>
+</ul></li>
+</ul>
+<p><strong>Implication:</strong> Battery anxiety is more about expectation mismatch than catastrophic failure. Managing expectations and communicating battery longevity honestly can reduce the emotional burden without needing major hardware redesigns.</p>
+<hr>
+</section>
+<section id="core-listening-features-sound_quality-anc-comfort-generate-the-highest-joy" class="level4">
+<h4 class="anchored" data-anchor-id="core-listening-features-sound_quality-anc-comfort-generate-the-highest-joy">3. Core listening features (sound_quality, ANC, comfort) generate the highest joy</h4>
+<ul>
+<li><p>Sound quality, ANC, and comfort consistently produce strong joy and trust signals — the most positive emotional categories.</p></li>
+<li><p>These features have the lowest levels of anger, disgust, and fear, showing stable satisfaction.</p></li>
+</ul>
+<p><strong>Implication:</strong> These are primary value-creation features. When brands excel in these areas, users reward them with strong emotional positivity, leading to higher willingness to recommend and stronger brand affinity.</p>
+<hr>
+</section>
+<section id="mic-quality-and-transparency-mode-produce-mixed-emotions" class="level4">
+<h4 class="anchored" data-anchor-id="mic-quality-and-transparency-mode-produce-mixed-emotions">4. Mic quality and transparency mode produce mixed emotions</h4>
+<ul>
+<li><p>Both show moderate joy/trust but also noticeable sadness or frustration.</p></li>
+<li><p>Users appreciate these features, but performance is inconsistent across brands and models.</p></li>
+</ul>
+<p><strong>Implication:</strong> These represent opportunity zones: not as emotionally volatile as durability, but with clear room to differentiate through better execution.</p>
+<hr>
+</section>
+<section id="price-drives-trust-and-positive-sentiment-but-still-triggers-negativity-when-expectations-arent-met" class="level4">
+<h4 class="anchored" data-anchor-id="price-drives-trust-and-positive-sentiment-but-still-triggers-negativity-when-expectations-arent-met">5. Price drives trust and positive sentiment — but still triggers negativity when expectations aren’t met</h4>
+<ul>
+<li><p>Price surprisingly registers higher trust and joy compared to other “non-technical” features.</p></li>
+<li><p>Yet negative emotions appear when users feel the product under-delivers relative to cost.</p></li>
+</ul>
+<p><strong>Implication:</strong> Pricing influences emotional framing: - A reasonable price boosts trust, but disappointment becomes more intense when expectations don’t match the price tag.</p>
+<hr>
+</section>
+</section>
+<section id="overall-insights-business-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="overall-insights-business-takeaways">Overall Insights &amp; Business Takeaways</h3>
+<p><strong>Negative emotions are concentrated in failure-prone features</strong></p>
+<ul>
+<li>Durability</li>
+<li>Connectivity</li>
+<li>Battery</li>
+</ul>
+<p>These features create emotional pain points that directly impact retention, brand loyalty, and review scores.</p>
+<p><strong>Positive emotions cluster around experiential qualities</strong></p>
+<ul>
+<li>Sound quality</li>
+<li>ANC</li>
+<li>Comfort</li>
+</ul>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>The emotion heatmap shows that <strong>failures feel personal, but great audio experiences feel meaningful</strong>. Users express deep frustration over reliability issues (durability, connectivity, battery), but strong joy and trust toward experiential features (sound, ANC, comfort). These emotional patterns reveal not just product performance, but how each feature contributes to — or detracts from — the overall user experience, helping identify the biggest opportunities for product improvement and competitive differentiation.</p>
+<hr>
+</section>
+</section>
+<section id="business-question-4-how-did-public-sentiment-respond-to-the-airpods-pro-usb-c-launch" class="level2">
+<h2 class="anchored" data-anchor-id="business-question-4-how-did-public-sentiment-respond-to-the-airpods-pro-usb-c-launch">Business Question 4: How Did Public Sentiment Respond to the AirPods Pro USB-C Launch?</h2>
+<p><strong>Question:</strong> How did the transition from Lightning to USB-C charging impact Reddit discussions and sentiment around AirPods Pro?</p>
+<hr>
+<section id="findings" class="level3">
+<h3 class="anchored" data-anchor-id="findings">Findings</h3>
+<section id="discussion-volume-trends" class="level4">
+<h4 class="anchored" data-anchor-id="discussion-volume-trends">1. Discussion Volume Trends</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/plots/nlp_airpods_discussion_volume.png" class="img-fluid figure-img"></p>
+<figcaption>Discussion Volume Over Time</figcaption>
+</figure>
+</div>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>Discussion volume <strong>peaked in September 2023</strong> (USB-C launch month), with a <strong>3.2x increase</strong> compared to baseline</li>
+<li>Post-launch activity remained <strong>elevated for 2-3 months</strong> before returning to normal levels</li>
+<li>Weekly discussion patterns show <strong>consistent mid-week peaks</strong> (Tuesday-Thursday)</li>
+<li>The launch generated <strong>sustained interest</strong> rather than a short-lived spike</li>
+</ul>
+<hr>
+</section>
+<section id="sentiment-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="sentiment-analysis">2. Sentiment Analysis</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/plots/nlp_airpods_sentiment_analysis.png" class="img-fluid figure-img"></p>
+<figcaption>Sentiment Changes Over Time</figcaption>
+</figure>
+</div>
+<p><strong>Summary Statistics</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 27%">
+<col style="width: 34%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Pre-Launch (Jun-Aug 2023)</th>
+<th>Post-Launch (Sep 2023-Jul 2024)</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Average Sentiment Score</strong></td>
+<td>+0.42</td>
+<td>+0.38</td>
+<td>-9.5%</td>
+</tr>
+<tr class="even">
+<td><strong>Positive Posts (%)</strong></td>
+<td>68.2%</td>
+<td>64.5%</td>
+<td>-3.7pp</td>
+</tr>
+<tr class="odd">
+<td><strong>Negative Posts (%)</strong></td>
+<td>15.3%</td>
+<td>18.7%</td>
+<td>+3.4pp</td>
+</tr>
+<tr class="even">
+<td><strong>Neutral Posts (%)</strong></td>
+<td>16.5%</td>
+<td>16.8%</td>
+<td>+0.3pp</td>
+</tr>
+<tr class="odd">
+<td><strong>Posts with Strong Emotion</strong></td>
+<td>22.1%</td>
+<td>25.4%</td>
+<td>+3.3pp</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>Sentiment remained <strong>predominantly positive</strong> throughout the period</li>
+<li>A <strong>slight decrease in positive sentiment</strong> (-9.5%) post-launch, likely due to:
+<ul>
+<li><strong>Upgrade fatigue</strong> (users frustrated by incremental changes)</li>
+<li><strong>Price concerns</strong> (same price for USB-C-only feature)</li>
+<li><strong>Lightning cable ecosystem</strong> disruption complaints</li>
+</ul></li>
+<li><strong>Negative sentiment increased moderately</strong> (+3.4 percentage points), concentrated around compatibility and value concerns</li>
+<li>Overall, the transition was <strong>well-received but not universally celebrated</strong></li>
+</ul>
+<hr>
+</section>
+<section id="keyword-evolution" class="level4">
+<h4 class="anchored" data-anchor-id="keyword-evolution">3. Keyword Evolution</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/plots/nlp_airpods_keyword_evolution.png" class="img-fluid figure-img"></p>
+<figcaption>Keyword Trends</figcaption>
+</figure>
+</div>
+<p><strong>Top Keyword Changes (Pre vs.&nbsp;Post Launch)</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 31%">
+<col style="width: 33%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Keyword</th>
+<th>Pre-Launch Mentions</th>
+<th>Post-Launch Mentions</th>
+<th>% Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>usb-c</strong></td>
+<td>287</td>
+<td>3,842</td>
+<td>+1,238%</td>
+</tr>
+<tr class="even">
+<td><strong>lightning</strong></td>
+<td>1,053</td>
+<td>2,167</td>
+<td>+106%</td>
+</tr>
+<tr class="odd">
+<td><strong>upgrade</strong></td>
+<td>2,341</td>
+<td>4,126</td>
+<td>+76%</td>
+</tr>
+<tr class="even">
+<td><strong>charging</strong></td>
+<td>1,876</td>
+<td>3,512</td>
+<td>+87%</td>
+</tr>
+<tr class="odd">
+<td><strong>cable</strong></td>
+<td>1,429</td>
+<td>2,789</td>
+<td>+95%</td>
+</tr>
+<tr class="even">
+<td><strong>case</strong></td>
+<td>3,214</td>
+<td>3,987</td>
+<td>+24%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li><strong>“USB-C” mentions exploded</strong> from near-zero to dominant keyword (+1,238%)</li>
+<li><strong>“Lightning” discussion doubled</strong>, primarily in comparisons and transition concerns</li>
+<li><strong>“Upgrade” and “charging”</strong> saw major increases, indicating users weighing purchase decisions</li>
+<li><strong>Case compatibility</strong> became a significant topic (+24%), showing ecosystem concerns</li>
+</ul>
+<hr>
+</section>
+<section id="topic-modeling-results" class="level4">
+<h4 class="anchored" data-anchor-id="topic-modeling-results">4. Topic Modeling Results</h4>
+<p><strong>Discovered Topics (LDA Analysis)</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 28%">
+<col style="width: 53%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Topic #</th>
+<th>Theme</th>
+<th>Top Keywords</th>
+<th>% of Posts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td>USB-C Transition Reactions</td>
+<td>usb-c, lightning, cable, switch, finally, adapter</td>
+<td>32.4%</td>
+</tr>
+<tr class="even">
+<td><strong>2</strong></td>
+<td>Purchase &amp; Upgrade Decisions</td>
+<td>upgrade, worth, buy, price, new, generation</td>
+<td>28.1%</td>
+</tr>
+<tr class="odd">
+<td><strong>3</strong></td>
+<td>Sound Quality Discussion</td>
+<td>sound, quality, anc, noise, cancellation, audio</td>
+<td>18.7%</td>
+</tr>
+<tr class="even">
+<td><strong>4</strong></td>
+<td>Ecosystem &amp; Compatibility</td>
+<td>apple, device, iphone, mac, charging, case</td>
+<td>12.3%</td>
+</tr>
+<tr class="odd">
+<td><strong>5</strong></td>
+<td>User Experience &amp; Issues</td>
+<td>battery, connect, issue, firmware, update, bluetooth</td>
+<td>8.5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li><strong>USB-C transition dominated</strong> conversation (32.4% of posts)</li>
+<li><strong>Value proposition</strong> was the second-largest theme (28.1%), showing price sensitivity</li>
+<li><strong>Core product features</strong> (sound, ANC) remained important but secondary to launch news</li>
+<li><strong>Ecosystem integration</strong> concerns were notable (12.3%), highlighting Apple user frustrations</li>
+</ul>
+<hr>
+</section>
+<section id="pre-vs.-post-launch-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="pre-vs.-post-launch-comparison">5. Pre vs.&nbsp;Post Launch Comparison</h4>
+<p><strong>Sentiment by Period</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 7%">
+<col style="width: 18%">
+<col style="width: 23%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Period</th>
+<th>Posts</th>
+<th>Avg Sentiment</th>
+<th>Median Sentiment</th>
+<th>Std Dev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Pre-Launch</strong> (Jun-Aug’23)</td>
+<td>4,127</td>
+<td>+0.42</td>
+<td>+0.51</td>
+<td>0.38</td>
+</tr>
+<tr class="even">
+<td><strong>Launch</strong> (Sep-Nov’23)</td>
+<td>8,456</td>
+<td>+0.36</td>
+<td>+0.44</td>
+<td>0.42</td>
+</tr>
+<tr class="odd">
+<td><strong>Post-Launch</strong> (Dec’23-Jul)</td>
+<td>5,841</td>
+<td>+0.40</td>
+<td>+0.48</td>
+<td>0.39</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monthly Sentiment Trends</strong></p>
+<ul>
+<li><strong>September 2023:</strong> Initial excitement (+0.38) tempered by “not a big upgrade” concerns</li>
+<li><strong>October-November 2023:</strong> Sentiment dipped to lowest point (+0.32) as users evaluated real-world value</li>
+<li><strong>December 2023 onward:</strong> Gradual recovery (+0.40) as product matured and ecosystem adapted</li>
+</ul>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code and Data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All NLP analysis code is available in <code>code/nlp/</code>. Results: <code>data/csv/airpods_*.csv</code> | Visualizations: <code>data/plots/airpods_*.png</code></p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="summary-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
+<section id="answers-to-nlp-business-questions" class="level3">
+<h3 class="anchored" data-anchor-id="answers-to-nlp-business-questions">Answers to NLP Business Questions</h3>
+<ol type="1">
+<li><p><strong>[Question 1]</strong>: Reddit users focus primarily on sound quality, price, battery, and ANC. Sentiment is moderately positive overall, with durability, battery, and app being key pain points.</p></li>
+<li><p><strong>[Question 2]</strong>: Sony and Sennheiser dominate earbud discussions with strong positive sentiment. Samsung faces higher negative discussion despite large market presence. Feature focus varies—Apple/Samsung emphasize connectivity while audio brands emphasize sound.</p></li>
+<li><p><strong>[Question 3]</strong>: Emotion analysis reveals durability and connectivity trigger the strongest anger and sadness, indicating these create the most negative user experiences. In contrast, sound quality, ANC, and comfort generate joy and trust, showing where users feel delight rather than disappointment.</p></li>
+<li><p><strong>[Question 4]</strong>: The AirPods Pro USB-C launch generated significant discussion (+3.2x volume) but modest sentiment decline (-9.5%). While USB-C standardization was welcomed, the incremental nature limited upgrade enthusiasm. Value concerns and ecosystem disruption were notable friction points.</p></li>
+</ol>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All NLP code is in <code>code/nlp/</code> directory.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DSAN 6000 Big Data Analytics Project</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

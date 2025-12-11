@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>DSAN 6000 Big Data Project – Conclusion and Recommendations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">DSAN 6000 Big Data Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html"> 
+<span class="menu-text">EDA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./nlp.html"> 
+<span class="menu-text">NLP</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ml.html"> 
+<span class="menu-text">ML</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./conclusion.html" aria-current="page"> 
+<span class="menu-text">Conclusion</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#answers-to-all-10-business-questions" id="toc-answers-to-all-10-business-questions" class="nav-link" data-scroll-target="#answers-to-all-10-business-questions">Answers to All 10 Business Questions</a>
+  <ul class="collapse">
+  <li><a href="#eda-questions" id="toc-eda-questions" class="nav-link" data-scroll-target="#eda-questions">EDA Questions</a></li>
+  <li><a href="#nlp-questions" id="toc-nlp-questions" class="nav-link" data-scroll-target="#nlp-questions">NLP Questions</a></li>
+  <li><a href="#ml-questions" id="toc-ml-questions" class="nav-link" data-scroll-target="#ml-questions">ML Questions</a></li>
+  </ul></li>
+  <li><a href="#major-findings" id="toc-major-findings" class="nav-link" data-scroll-target="#major-findings">Major Findings</a>
+  <ul class="collapse">
+  <li><a href="#key-insight-1-engagement-is-highly-concentrated-in-a-few-core-communities" id="toc-key-insight-1-engagement-is-highly-concentrated-in-a-few-core-communities" class="nav-link" data-scroll-target="#key-insight-1-engagement-is-highly-concentrated-in-a-few-core-communities">Key Insight 1: Engagement Is Highly Concentrated in a Few Core Communities</a></li>
+  <li><a href="#key-insight-2-performance-drives-satisfaction-reliability-drives-frustration" id="toc-key-insight-2-performance-drives-satisfaction-reliability-drives-frustration" class="nav-link" data-scroll-target="#key-insight-2-performance-drives-satisfaction-reliability-drives-frustration">Key Insight 2: Performance Drives Satisfaction, Reliability Drives Frustration</a></li>
+  <li><a href="#key-insight-3-early-social-feedback-determines-long-term-success" id="toc-key-insight-3-early-social-feedback-determines-long-term-success" class="nav-link" data-scroll-target="#key-insight-3-early-social-feedback-determines-long-term-success">Key Insight 3: Early Social Feedback Determines Long-Term Success</a></li>
+  </ul></li>
+  <li><a href="#addressing-the-high-level-problem" id="toc-addressing-the-high-level-problem" class="nav-link" data-scroll-target="#addressing-the-high-level-problem">Addressing the High-Level Problem</a></li>
+  <li><a href="#business-recommendations" id="toc-business-recommendations" class="nav-link" data-scroll-target="#business-recommendations">Business Recommendations</a>
+  <ul class="collapse">
+  <li><a href="#recommendation-1-prioritize-durability-and-connectivity-in-product-roadmaps" id="toc-recommendation-1-prioritize-durability-and-connectivity-in-product-roadmaps" class="nav-link" data-scroll-target="#recommendation-1-prioritize-durability-and-connectivity-in-product-roadmaps">Recommendation 1: Prioritize Durability and Connectivity in Product Roadmaps</a></li>
+  <li><a href="#recommendation-2-optimize-first-hour-engagement-strategy" id="toc-recommendation-2-optimize-first-hour-engagement-strategy" class="nav-link" data-scroll-target="#recommendation-2-optimize-first-hour-engagement-strategy">Recommendation 2: Optimize First-Hour Engagement Strategy</a></li>
+  <li><a href="#recommendation-3-target-communities-by-their-complaint-fingerprints" id="toc-recommendation-3-target-communities-by-their-complaint-fingerprints" class="nav-link" data-scroll-target="#recommendation-3-target-communities-by-their-complaint-fingerprints">Recommendation 3: Target Communities by Their “Complaint Fingerprints”</a></li>
+  </ul></li>
+  <li><a href="#limitations-and-future-work" id="toc-limitations-and-future-work" class="nav-link" data-scroll-target="#limitations-and-future-work">Limitations and Future Work</a>
+  <ul class="collapse">
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
+  </ul></li>
+  <li><a href="#technical-achievements" id="toc-technical-achievements" class="nav-link" data-scroll-target="#technical-achievements">Technical Achievements</a>
+  <ul class="collapse">
+  <li><a href="#big-data-processing" id="toc-big-data-processing" class="nav-link" data-scroll-target="#big-data-processing">Big Data Processing</a></li>
+  <li><a href="#analytical-breadth" id="toc-analytical-breadth" class="nav-link" data-scroll-target="#analytical-breadth">Analytical Breadth</a></li>
+  </ul></li>
+  <li><a href="#lessons-learned" id="toc-lessons-learned" class="nav-link" data-scroll-target="#lessons-learned">Lessons Learned</a>
+  <ul class="collapse">
+  <li><a href="#technical-lessons" id="toc-technical-lessons" class="nav-link" data-scroll-target="#technical-lessons">Technical Lessons</a></li>
+  <li><a href="#domain-lessons" id="toc-domain-lessons" class="nav-link" data-scroll-target="#domain-lessons">Domain Lessons</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Conclusion and Recommendations</h1>
+<p class="subtitle lead">Final Analysis and Business Impact</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
+<p>This project analyzed <strong>9.5 million Reddit discussions across 23 audio-focused communities</strong> to uncover consumer preferences, pain points, sentiment dynamics, and engagement mechanisms in the wireless audio market. Using large-scale <strong>EDA, NLP, and machine learning</strong>, we identified how user behavior evolves over time, what features dominate discussion and emotional response, how users react to major product launches, and what factors truly drive viral engagement.</p>
+<p>Key findings show that <strong>general audio communities dominate engagement</strong>, <strong>sound quality, battery, and comfort</strong> are the most discussed features, while <strong>durability and connectivity generate the strongest negative emotions</strong>. Brand discussions are highly polarized, with <strong>Sony and Bose praised for performance</strong>, while <strong>Samsung faces disproportionately high negative sentiment</strong>. From a predictive perspective, <strong>early comment activity explains over 74% of engagement outcomes</strong>, confirming a strong social snowball effect. Together, these findings provide actionable intelligence for product strategy, marketing, and community targeting.</p>
+<hr>
+</section>
+<section id="answers-to-all-10-business-questions" class="level2">
+<h2 class="anchored" data-anchor-id="answers-to-all-10-business-questions">Answers to All 10 Business Questions</h2>
+<section id="eda-questions" class="level3">
+<h3 class="anchored" data-anchor-id="eda-questions">EDA Questions</h3>
+<ol type="1">
+<li><p><strong>How does public discussion about audio products evolve over time?</strong><br>
+Discussions peak during <strong>U.S. daytime hours (15:00–20:00 UTC)</strong> and <strong>mid-week (Tuesday–Friday)</strong>. <code>headphones</code> and <code>audiophile</code> dominate activity, accounting for nearly <strong>70% of all comments</strong>.</p></li>
+<li><p><strong>Which product communities attract the highest engagement?</strong><br>
+<strong>General audio subreddits</strong> significantly outperform brand-specific communities in score, comment volume, and posting frequency. <code>audiophile</code> and <code>headphones</code> act as central hubs, while <code>airpods</code> leads among brand subs.</p></li>
+<li><p><strong>How does post timing and structure relate to discussion depth?</strong><br>
+Engagement is strongly tied to <strong>post visibility (r = 0.685 between score and comments)</strong> and optimal timing (Tuesdays around 14:00 UTC). <strong>Title length and post type have negligible impact</strong>.</p></li>
+</ol>
+<hr>
+</section>
+<section id="nlp-questions" class="level3">
+<h3 class="anchored" data-anchor-id="nlp-questions">NLP Questions</h3>
+<ol start="4" type="1">
+<li><p><strong>What features and sentiments are most discussed about wireless earbuds?</strong><br>
+The most discussed features are <strong>price, sound quality, battery, ANC, comfort, and durability</strong>. Overall sentiment is moderately positive, but <strong>durability, battery, and app performance</strong> are the core pain points.</p></li>
+<li><p><strong>Which earbud brands dominate controversial discussion and sentiment?</strong><br>
+<strong>Sony and Bose</strong> dominate technical performance discussions with generally positive sentiment. <strong>Samsung</strong> shows the <strong>highest proportion of negative discussion</strong>, while <strong>Beats</strong> has the highest positive ratio.</p></li>
+<li><p><strong>What emotional reactions do users express toward different features?</strong><br>
+<strong>Durability and connectivity trigger the strongest anger and sadness</strong>, while <strong>sound quality, ANC, and comfort generate joy and trust</strong>, indicating clear emotional separation across feature experiences.</p></li>
+<li><p><strong>How did public sentiment respond to the AirPods Pro USB-C launch?</strong><br>
+The launch caused a <strong>3.2× spike in discussion volume</strong>. Sentiment declined slightly (-9.5%) due to <strong>value and ecosystem concerns</strong>, but remained net positive. USB-C standardization was welcomed but seen as an <strong>incremental upgrade</strong>.</p></li>
+</ol>
+<hr>
+</section>
+<section id="ml-questions" class="level3">
+<h3 class="anchored" data-anchor-id="ml-questions">ML Questions</h3>
+<ol start="8" type="1">
+<li><p><strong>How well can we predict post engagement using content vs.&nbsp;early comments?</strong><br>
+Content-only models achieved <strong>R² = 0.12</strong>, while adding early comments boosted performance to <strong>R² = 0.48</strong>. <strong>Early engagement is the dominant predictor of final popularity</strong>.</p></li>
+<li><p><strong>Can we classify Reddit post sentiment at scale?</strong><br>
+The sentiment classifier achieved <strong>~85% accuracy</strong>, but <strong>negative class recall remains low</strong> due to class imbalance and subtle expression of negative sentiment.</p></li>
+<li><p><strong>Can we identify inauthentic promotional accounts versus genuine users in audio product discussions?</strong></p>
+<p>Bot detection achieved <strong>99.5% accuracy</strong> using behavioral features. <strong>Temporal patterns (posting hour variance)</strong> are the strongest signal (39.4%), while <strong>activity longevity</strong> separates promotional campaigns from genuine users (17.9%).</p></li>
+<li><p><strong>What underlying painpoint clusters exist in Reddit discussions about wireless earbuds?</strong></p>
+<p>K-Means clustering identified <strong>9 distinct painpoint clusters</strong> (k=9 via silhouette score). Each subreddit has a unique “complaint fingerprint”: <strong>audiophile/audio</strong> focus on <strong>sound quality</strong>, <strong>bluetooth</strong> emphasizes <strong>connectivity</strong>, while <strong>BuyItForLife/running</strong> prioritize <strong>durability</strong>.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="major-findings" class="level2">
+<h2 class="anchored" data-anchor-id="major-findings">Major Findings</h2>
+<section id="key-insight-1-engagement-is-highly-concentrated-in-a-few-core-communities" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight-1-engagement-is-highly-concentrated-in-a-few-core-communities">Key Insight 1: Engagement Is Highly Concentrated in a Few Core Communities</h3>
+<p><code>headphones</code> and <code>audiophile</code> dominate nearly all engagement metrics and function as central hubs in the Reddit audio ecosystem.</p>
+<p><strong>Business Impact:</strong> Brands focusing on these communities gain the highest visibility and return on engagement investment.</p>
+<hr>
+</section>
+<section id="key-insight-2-performance-drives-satisfaction-reliability-drives-frustration" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight-2-performance-drives-satisfaction-reliability-drives-frustration">Key Insight 2: Performance Drives Satisfaction, Reliability Drives Frustration</h3>
+<p><strong>Sound quality, comfort, and ANC</strong> generate the strongest positive sentiment, while <strong>durability, battery degradation, and connectivity failures</strong> generate the strongest negative emotions.</p>
+<p><strong>Business Impact:</strong> Engineering investment in <strong>reliability and long-term performance</strong> will yield the largest sentiment gains.</p>
+<hr>
+</section>
+<section id="key-insight-3-early-social-feedback-determines-long-term-success" class="level3">
+<h3 class="anchored" data-anchor-id="key-insight-3-early-social-feedback-determines-long-term-success">Key Insight 3: Early Social Feedback Determines Long-Term Success</h3>
+<p>Just <strong>five early-comment features explain over 74% of engagement prediction power</strong>, confirming a powerful <strong>snowball effect</strong> in Reddit’s ranking system.</p>
+<p><strong>Business Impact:</strong> Marketing and moderation strategies should focus on <strong>first-hour engagement optimization</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="addressing-the-high-level-problem" class="level2">
+<h2 class="anchored" data-anchor-id="addressing-the-high-level-problem">Addressing the High-Level Problem</h2>
+<p><strong>Original Problem Statement:</strong></p>
+<p>The wireless audio market exceeds $50B annually, but brands struggle to understand real-time consumer preferences, product pain points, and competitive dynamics from authentic consumer conversation.</p>
+<p><strong>How Our Analysis Addresses It:</strong></p>
+<p>Our integrated EDA, NLP, and ML pipeline converts <strong>raw social chatter into structured business intelligence</strong>. EDA reveals <strong>where and when engagement concentrates</strong>, NLP exposes <strong>what users care about emotionally and functionally</strong>, and ML quantifies <strong>how engagement actually forms and propagates</strong>. Together, these outputs enable companies to: - Detect <strong>feature-level pain points</strong> - Track <strong>brand-level sentiment and controversy</strong> - Measure <strong>launch reception</strong> - Forecast <strong>engagement and virality</strong> This directly supports <strong>product design, marketing strategy, and competitive positioning</strong>.</p>
+<hr>
+</section>
+<section id="business-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="business-recommendations">Business Recommendations</h2>
+<section id="recommendation-1-prioritize-durability-and-connectivity-in-product-roadmaps" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-1-prioritize-durability-and-connectivity-in-product-roadmaps">Recommendation 1: Prioritize Durability and Connectivity in Product Roadmaps</h3>
+<p><strong>Based on:</strong> Feature sentiment, emotion analysis, and painpoint clustering<br>
+<strong>Action:</strong> Reallocate R&amp;D focus toward <strong>battery longevity, structural durability, and Bluetooth stability</strong><br>
+<strong>Expected Impact:</strong> Reduced negative sentiment, higher repurchase intent, and stronger long-term brand trust</p>
+<hr>
+</section>
+<section id="recommendation-2-optimize-first-hour-engagement-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-2-optimize-first-hour-engagement-strategy">Recommendation 2: Optimize First-Hour Engagement Strategy</h3>
+<p><strong>Based on:</strong> Engagement prediction and feature importance results<br>
+<strong>Action:</strong> Time posts for peak hours, seed early discussions, and actively respond in the first hour<br>
+<strong>Expected Impact:</strong> Increased probability of viral reach and stronger sustained engagement</p>
+<hr>
+</section>
+<section id="recommendation-3-target-communities-by-their-complaint-fingerprints" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-3-target-communities-by-their-complaint-fingerprints">Recommendation 3: Target Communities by Their “Complaint Fingerprints”</h3>
+<p><strong>Based on:</strong> Painpoint clustering by subreddit<br>
+<strong>Action:</strong> Customize product messaging: emphasize <strong>sound in audiophile subs</strong>, <strong>durability in lifestyle/value subs</strong>, and <strong>connectivity in tech subs</strong><br>
+<strong>Expected Impact:</strong> Higher message relevance and conversion efficiency</p>
+<hr>
+</section>
+</section>
+<section id="limitations-and-future-work" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-future-work">Limitations and Future Work</h2>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<ul>
+<li>Sentiment labels rely on <strong>keyword-based heuristics</strong>, limiting detection of sarcasm and nuance<br>
+</li>
+<li>Reddit users are <strong>not fully representative of the global consumer market</strong><br>
+</li>
+<li>Computational constraints limited exploration of <strong>deep neural language models</strong></li>
+</ul>
+</section>
+<section id="future-work" class="level3">
+<h3 class="anchored" data-anchor-id="future-work">Future Work</h3>
+<ul>
+<li>Apply <strong>transformer-based sentiment and emotion models (BERT/RoBERTa)</strong><br>
+</li>
+<li>Integrate <strong>price data, sales data, or review platform data</strong><br>
+</li>
+<li>Extend analysis to <strong>product lifecycle forecasting</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="technical-achievements" class="level2">
+<h2 class="anchored" data-anchor-id="technical-achievements">Technical Achievements</h2>
+<section id="big-data-processing" class="level3">
+<h3 class="anchored" data-anchor-id="big-data-processing">Big Data Processing</h3>
+<ul>
+<li>Processed <strong>9.5 million rows</strong> of Reddit data<br>
+</li>
+<li>Utilized a <strong>4-node Apache Spark cluster</strong> on AWS<br>
+</li>
+<li>Performed distributed filtering, aggregation, and NLP at scale</li>
+</ul>
+</section>
+<section id="analytical-breadth" class="level3">
+<h3 class="anchored" data-anchor-id="analytical-breadth">Analytical Breadth</h3>
+<ul>
+<li><strong>EDA:</strong> Temporal analysis, engagement distribution, community overlap<br>
+</li>
+<li><strong>NLP:</strong> Feature extraction, sentiment analysis, emotion analysis, topic modeling<br>
+</li>
+<li><strong>ML:</strong> Regression, multi-class classification, viral prediction, clustering</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="lessons-learned" class="level2">
+<h2 class="anchored" data-anchor-id="lessons-learned">Lessons Learned</h2>
+<section id="technical-lessons" class="level3">
+<h3 class="anchored" data-anchor-id="technical-lessons">Technical Lessons</h3>
+<ul>
+<li>Distributed processing is essential for <strong>multi-million-row NLP pipelines</strong></li>
+<li>Feature engineering often matters more than model complexity</li>
+<li>Class imbalance severely constrains <strong>sentiment classification performance</strong></li>
+</ul>
+</section>
+<section id="domain-lessons" class="level3">
+<h3 class="anchored" data-anchor-id="domain-lessons">Domain Lessons</h3>
+<ul>
+<li>Reddit audio communities are <strong>highly interconnected</strong></li>
+<li>Users tolerate incremental innovation poorly without clear value justification</li>
+<li>Reliability issues provoke <strong>stronger emotional backlash than price</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h2>
+<p>This project demonstrates how <strong>large-scale social media analytics can be transformed into real, actionable consumer intelligence</strong>. By combining big data infrastructure with NLP and machine learning, we uncovered not only what users say about audio products, but <strong>how they feel, how they influence one another, and what ultimately drives visibility and success</strong>. The methods developed here are fully transferable to other consumer technology domains and provide a strong foundation for future market intelligence systems.</p>
+<hr>
+</section>
+<section id="acknowledgments" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
+<ul>
+<li><strong>Team Members:</strong> Ping Hill, Josh Lin, Zoo Un Park, Tongrui Zhang<br>
+</li>
+<li><strong>Course:</strong> DSAN 6000 Big Data Analytics<br>
+</li>
+<li><strong>Tools:</strong> Apache Spark, PySpark, Quarto<br>
+</li>
+<li><strong>Data Source:</strong> Reddit via Pushshift archives</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DSAN 6000 Big Data Analytics Project</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

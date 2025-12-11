@@ -1,0 +1,11 @@
+period,topic_num,top_terms,weights
+Pre-Launch,0,", 2, audio, sound, music, great, iphone, like, use, buy","0.062, 0.023, 0.022, 0.012, 0.010, 0.010, 0.010, 0.009, 0.009, 0.008"
+Pre-Launch,1,"2, [removed], case, airpod, new, find, usb-c, charging, buy, get","0.062, 0.048, 0.037, 0.021, 0.016, 0.014, 0.012, 0.012, 0.011, 0.010"
+Pre-Launch,2,", gen, 2, airpod, case, one, left, noise, right, 2nd","0.047, 0.023, 0.021, 0.021, 0.013, 0.011, 0.010, 0.010, 0.009, 0.009"
+Pre-Launch,3,", like, sound, good, 2, get, use, better, ear, really","0.084, 0.015, 0.013, 0.010, 0.009, 0.008, 0.007, 0.007, 0.007, 0.007"
+Pre-Launch,4,", gen, watch, iphone, ios, adaptive, macbook, 3rd, magsafe, charging","0.026, 0.017, 0.014, 0.012, 0.011, 0.011, 0.010, 0.010, 0.010, 0.010"
+Post-Launch,0,", 2, *, quality, buds, sound, earbuds, iphone, 3, better","0.114, 0.021, 0.021, 0.014, 0.013, 0.011, 0.010, 0.009, 0.009, 0.008"
+Post-Launch,1,"2, gen, [removed], 2nd, airpod, buy, 1st, case, generation, usb-c","0.072, 0.058, 0.056, 0.034, 0.022, 0.012, 0.011, 0.011, 0.011, 0.010"
+Post-Launch,2,", case, 2, airpod, gen, like, got, noise, find, left","0.045, 0.024, 0.021, 0.016, 0.013, 0.012, 0.011, 0.010, 0.009, 0.008"
+Post-Launch,3,", sound, like, good, anc, use, earbuds, 2, -, better","0.094, 0.019, 0.014, 0.012, 0.010, 0.010, 0.010, 0.009, 0.009, 0.009"
+Post-Launch,4,", airpod, new, one, pair, get, 2, i’m, right, buy","0.028, 0.027, 0.020, 0.015, 0.014, 0.012, 0.011, 0.010, 0.009, 0.009"

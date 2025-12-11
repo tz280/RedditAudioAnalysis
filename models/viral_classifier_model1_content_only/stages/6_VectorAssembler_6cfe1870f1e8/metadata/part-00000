@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1764984642654,"sparkVersion":"3.4.4","uid":"VectorAssembler_6cfe1870f1e8","paramMap":{"outputCol":"features","inputCols":["tfidf_features","subreddit_vec","title_len","selftext_len","post_hour","post_dow"]},"defaultParamMap":{"outputCol":"VectorAssembler_6cfe1870f1e8__output","handleInvalid":"error"}}

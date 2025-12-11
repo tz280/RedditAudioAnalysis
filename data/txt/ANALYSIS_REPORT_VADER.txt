@@ -1,0 +1,48 @@
+================================================================================
+WIRELESS EARBUDS ANALYSIS REPORT (VADER)
+================================================================================
+
+1. MOST DISCUSSED FEATURES
+ 1. price             :  108,382 mentions
+ 2. sound_quality     :   98,627 mentions
+ 3. battery           :   73,227 mentions
+ 4. anc               :   72,858 mentions
+ 5. durability        :   64,550 mentions
+ 6. comfort           :   58,761 mentions
+ 7. connectivity      :   47,580 mentions
+ 8. mic_quality       :   37,989 mentions
+ 9. water_resistance  :   17,806 mentions
+10. transparency      :    7,068 mentions
+
+2. TOP NEGATIVE FEATURES
+ 1. case           : +0.177
+ 2. durability     : +0.276
+ 3. battery        : +0.291
+ 4. app            : +0.301
+ 5. water_resistance: +0.304
+
+3. TOP PAIN POINTS
+ 1. durability     : ~18,760 negative
+ 2. battery        : ~18,120 negative
+ 3. price          : ~16,720 negative
+ 4. anc            : ~13,120 negative
+ 5. sound_quality  : ~11,600 negative
+ 6. connectivity   : ~10,380 negative
+ 7. comfort        : ~10,220 negative
+ 8. mic_quality    : ~5,720 negative
+ 9. water_resistance: ~4,040 negative
+10. transparency   : ~1,360 negative
+
+4. BRAND MENTIONS
+ 1. AIRPODS   : 18,705 mentions
+    Top features: anc (2876), price (2666), comfort (2382)
+ 2. SONY      : 18,207 mentions
+    Top features: anc (3276), price (2775), sound_quality (2566)
+ 3. BOSE      : 15,379 mentions
+    Top features: anc (2854), comfort (2527), price (1878)
+ 4. SAMSUNG   : 12,767 mentions
+    Top features: battery (3264), price (2030), anc (1608)
+ 5. JABRA     :  4,334 mentions
+    Top features: anc (734), comfort (698), price (644)
+ 6. ANKER     :  1,990 mentions
+    Top features: price (389), anc (304), battery (278)

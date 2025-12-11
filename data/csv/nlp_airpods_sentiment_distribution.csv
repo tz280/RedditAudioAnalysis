@@ -1,0 +1,7 @@
+period,sentiment_category,count
+Post-Launch,Positive,7856
+Pre-Launch,Neutral,1045
+Pre-Launch,Positive,2271
+Post-Launch,Negative,3292
+Pre-Launch,Negative,1127
+Post-Launch,Neutral,2833

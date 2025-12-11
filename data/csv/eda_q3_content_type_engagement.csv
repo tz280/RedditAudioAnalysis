@@ -1,0 +1,3 @@
+has_selftext,num_posts,avg_comments,avg_score,median_comments,content_type
+1,398419,9.721052459847547,11.346471930304528,1,Has Text Content
+0,109565,45.517044676675944,216.63336832017524,1,Link/Media Only

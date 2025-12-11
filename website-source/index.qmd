@@ -1,0 +1,139 @@
+---
+title: "AudioInsight: Consumer Intelligence from Reddit Audio Product Discussions"
+subtitle: "DSAN 6000 Big Data Analytics - Fall 2025"
+---
+
+## Team Members
+
+- Tongrui Zhang
+- Zoo Un Park
+- Ping Hill
+- Josh Lin
+
+## Project Overview
+
+**High-Level Problem Statement:**
+
+The wireless audio market exceeds $50 billion annually, yet brands struggle to understand real-time consumer preferences and product pain points. This project analyzes **9.5 million Reddit discussions** across 23 audio-focused communities to extract actionable business intelligence through big data analytics, NLP, and machine learning. By examining authentic consumer conversations about wireless earbuds, headphones, and audio equipment, we identify purchase drivers, detect emerging issues, understand competitive dynamics, and predict market trends—enabling data-driven decisions for product development and marketing strategy.
+
+### Dataset
+
+- **Source:** Reddit Comments and Submissions 
+- **Time Period:** June 1, 2023 - July 31, 2024 (14 months)
+- **Subreddits:** 23 audio-focused communities 
+- **Scale:** 9,525,830 total rows
+  - Comments: 9,017,846
+  - Submissions: 507,984
+- **Size:** ~4.5 GB (Parquet compressed)
+- **Storage:** AWS S3 distributed processing
+- **Infrastructure:** 4-node Spark cluster
+
+### Business Questions
+
+We address 11 business questions spanning three analytical approaches:
+
+**Exploratory Data Analysis (EDA):**
+
+1. **How does public discussion about audio products evolve over time across subreddits, days, and hours?**
+2. **Which product and brand communities attract the highest engagement and user overlap on Reddit?**
+3. **How do post timing and structural characteristics (title length, content type) relate to discussion depth and engagement?**
+
+**Natural Language Processing (NLP):**
+
+4. **What features (pain points & brands) and sentiments are most discussed about wireless earbuds on Reddit?**
+5. **Which earbud brands dominate controversial discussion, and how does sentiment (positive/negative/neutral) differ across brands?**
+6. **What emotional reactions (joy, anger, sadness, trust, etc.) do Reddit users express toward different earbud features?**
+7. **How did public sentiment and discussion volume respond to the AirPods Pro USB-C launch and the transition from Lightning to USB-C?**
+
+**Machine Learning (ML):**
+
+8. **How well can we predict Reddit post engagement (log(1+score)) using only content at posting time, and how much additional predictive power comes from early comment activity?**
+9. **Can we automatically classify the emotional tone of Reddit posts (positive, negative, neutral) at scale using supervised learning?**
+10. **Can we identify inauthentic promotional accounts versus genuine users in audio product discussions?**
+11. **What underlying pain-point clusters exist in wireless earbud discussions, and how do these clusters differ across subreddits and communities?**
+
+See [BUSINESS_QUESTIONS.md](https://github.com/your-repo/BUSINESS_QUESTIONS.md) for detailed technical approaches.
+
+## Methodology
+
+### Data Processing Infrastructure
+
+- **Platform:** Apache Spark cluster on AWS EC2
+- **Processing:** Distributed computing with PySpark
+- **Storage:** Amazon S3 for data lake architecture
+- **Scale:** Processing hundreds of millions of rows
+
+### Analysis Pipeline
+
+1. **Data Acquisition & Filtering** (Milestone 0)
+   - Copy full Reddit dataset from source bucket
+   - Filter to subreddits of interest
+   - Generate dataset statistics
+
+2. **Exploratory Data Analysis** (Milestone 1) → [EDA Page](eda.qmd)
+   - Statistical analysis
+   - Temporal patterns
+   - Community comparisons
+
+3. **Natural Language Processing** (Milestone 2) → [NLP Page](nlp.qmd)
+   - Sentiment analysis
+   - Topic modeling
+   - Text mining
+
+4. **Machine Learning** (Milestone 3) → [ML Page](ml.qmd)
+   - Feature engineering
+   - Model training and evaluation
+   - Prediction and classification
+
+5. **Final Analysis** (Milestone 4) → [Conclusion](conclusion.qmd)
+   - Synthesis of findings
+   - Business recommendations
+
+## Key Findings Preview
+
+::: {.callout-note}
+## Key Takeaways at a Glance
+
+Our analysis shows that:
+
+- **Engagement is highly concentrated** in a few core communities (`headphones`, `audiophile`), with clear peak posting windows during U.S. daytime and mid-week.  
+- Users are **most satisfied with sound quality, comfort, and ANC**, but show **strong negative emotions around durability, battery life, and connectivity**.  
+- **Early comment activity is the single strongest predictor of final engagement**, far outweighing content-only features and confirming a strong social snowball effect in Reddit’s ranking dynamics.
+:::
+
+### Major Insights
+
+1. **EDA – Centralized Ecosystem & Temporal Rhythms:**  
+   A small number of general audio communities drive nearly 70% of all activity, with engagement peaking during U.S. mornings and mid-week. Timing and community choice matter more than title length or post format.
+
+2. **NLP – Performance vs. Reliability Trade-offs:**  
+   Redditors consistently praise **sound, comfort, and ANC**, but express concentrated frustration about **durability, battery degradation, app bugs, and connectivity issues**. Emotion analysis reveals where users feel delight vs. disappointment.
+
+3. **ML – Early Social Proof Drives Virality:**  
+   Content-only models explain little of engagement variance (R² ≈ 0.12), while adding early comment features boosts R² to ~0.48. Just five early-comment features provide more predictive power than 5,000+ text features.
+
+### Business Impact
+
+These findings translate unstructured Reddit discussions into **actionable consumer intelligence**. Brands can:
+
+- **Refine product roadmaps** by investing in durability, battery, and connectivity improvements while preserving strengths in sound and comfort.  
+- **Target the most impactful communities and posting windows** to maximize organic reach and feedback.  
+- **Design launch and engagement strategies** that explicitly optimize the first hour of discussion, leveraging early social proof to drive long-term visibility and influence purchase decisions.
+
+## Navigation
+
+Use the navigation bar above to explore:
+
+- **[EDA](eda.qmd)**: Exploratory data analysis with statistical insights and temporal patterns
+- **[NLP](nlp.qmd)**: Natural language processing analysis including sentiment and topics
+- **[ML](ml.qmd)**: Machine learning models and predictions
+- **[Conclusion](conclusion.qmd)**: Summary of findings and recommendations
+
+## Repository
+
+- **GitHub:** https://github.com/gu-dsan6000/fall-2025-project-team23
+- **Documentation:** All code, data outputs, and analysis documentation available in repository
+
+---
+
+*Last updated: "2025-12-6"*

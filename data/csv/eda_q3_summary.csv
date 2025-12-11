@@ -1,0 +1,9 @@
+Metric,Value
+Average Comments per Post,17.44
+Median Comments per Post,1.00
+Max Comments on Single Post,17464
+Std Dev of Comments,115.20
+Peak Engagement Hour (UTC),14:00
+Best Day for Engagement,Tuesday
+Correlation: Score vs Comments,0.685
+Correlation: Title Length vs Comments,0.061

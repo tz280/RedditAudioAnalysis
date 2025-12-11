@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoderModel","timestamp":1764984642237,"sparkVersion":"3.4.4","uid":"OneHotEncoder_11c2423e374a","paramMap":{"outputCol":"subreddit_vec","inputCol":"subreddit_index"},"defaultParamMap":{"handleInvalid":"error","outputCol":"OneHotEncoder_11c2423e374a__output","dropLast":true}}

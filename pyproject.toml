@@ -1,0 +1,43 @@
+[project]
+name = "dsan6000-bigdata-project"
+version = "0.1.0"
+description = "DSAN 6000 End Semester Big Data Project using Apache Spark"
+requires-python = ">=3.10,<3.11"
+
+dependencies = [
+    # Spark
+    "pyspark==3.4.4",
+
+    # Data processing
+    "pandas==2.2.2",
+    "numpy==1.26.4",
+    "pyarrow==14.0.2",
+
+    # Visualization
+    "matplotlib==3.7.3",
+    "seaborn==0.13.2",
+
+    # NLP / sentiment
+    "nltk>=3.8.1",
+    "textblob>=0.19.0",
+    "vadersentiment>=3.3.2",
+
+    # AWS / S3
+    "boto3>=1.28.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+include = [
+    "*.ipynb",
+    "*.md",
+    "*.csv",
+    "*.txt",
+]

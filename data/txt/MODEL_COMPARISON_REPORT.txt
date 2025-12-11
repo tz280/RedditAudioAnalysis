@@ -1,0 +1,74 @@
+================================================================================
+REDDIT EARPHONE/AUDIO ENGAGEMENT PREDICTION
+MODEL COMPARISON: CONTENT-ONLY vs. CONTENT + EARLY COMMENTS
+================================================================================
+
+TASK
+--------------------------------------------------------------------------------
+Regression: predict log(1 + score) for Reddit submissions.
+
+MODEL DEFINITIONS
+--------------------------------------------------------------------------------
+Model 1 (Content-Only, Causal):
+  - Inputs available at posting time only:
+    • Title + selftext (TF-IDF)
+    • Subreddit (one-hot encoded)
+    • Title length, selftext length
+    • Posting hour of day, day of week
+
+Model 2 (Content + Early Comments):
+  - All features from Model 1, plus aggregated early engagement
+    using comments posted in the first hour after submission:
+    • Early comment count
+    • Average early comment score
+    • Maximum early comment score
+    • Average early comment length
+    • Standard deviation of early comment score
+
+GLOBAL PERFORMANCE
+--------------------------------------------------------------------------------
+Model 1 (Content-Only):
+  R²   = 0.1236
+  RMSE = 0.8288
+  MAE  = 0.4267
+
+Model 2 (Content + Early Comments):
+  R²   = 0.4849
+  RMSE = 0.6186
+  MAE  = 0.2932
+
+PERFORMANCE DIFFERENCE (MODEL 2 – MODEL 1)
+--------------------------------------------------------------------------------
+  ΔR²   = +0.3614
+  ΔRMSE = -0.2102
+  ΔMAE  = -0.1335
+
+INTERPRETATION
+--------------------------------------------------------------------------------
+Model 1 captures the portion of engagement that can be explained purely
+from content and posting time. Its R² reflects the intrinsic difficulty
+of predicting social media engagement based only on what is known at
+the moment of posting.
+
+Model 2 shows how much additional variance becomes predictable once we
+observe early engagement within the first hour. A substantial increase
+in R² (for example, from ≈0.14 to ≈0.35–0.45) indicates that early
+comments provide a strong signal for final outcomes.
+
+This gap between Model 1 and Model 2 quantifies the contribution of
+early engagement dynamics ("snowball effects") beyond pure content
+quality.
+
+PRACTICAL USE CASES
+--------------------------------------------------------------------------------
+Model 1 (Content-Only):
+  • Use before posting to compare alternative titles/selftexts.
+  • Run counterfactuals for content strategy (A/B testing).
+
+Model 2 (Content + Early Comments):
+  • Use after 1 hour to prioritize potentially viral posts.
+  • Support moderation or recommendation decisions.
+
+================================================================================
+END OF REPORT
+================================================================================
