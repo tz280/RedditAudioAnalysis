@@ -1,59 +1,176 @@
-/* Custom styles for DSAN 6000 Project Website */
+/* =====================================================
+   TECH BLUE THEME — FINAL CLEAN VERSION
+   
+   ===================================================== */
 
-/* Improve readability */
+/* ---- GLOBAL FONT (Return to clean default system font) ---- */
 body {
-    font-size: 16px;
-    line-height: 1.6;
+  background: linear-gradient(180deg, #0c1624, #112233, #0c1624);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  color: #dce7f7;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.97rem;
+  margin: 0;
 }
 
-/* Make callouts more prominent */
-.callout {
-    border-left-width: 5px;
-    margin: 1.5em 0;
+/* ---- MAIN CONTENT ---- */
+.main-container, .page-content {
+  background: rgba(15, 26, 44, 0.70);
+  backdrop-filter: blur(6px);
+  padding: 1.7rem;
+  border-radius: 14px;
+  max-width: 1100px;
+  margin: auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.45);
 }
 
-/* Style for code blocks */
-pre {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    padding: 1rem;
-}
-
-/* Improve table styling */
-table {
-    margin: 1.5em 0;
-}
-
-/* Style for images */
-img {
-    max-width: 100%;
-    height: auto;
-    margin: 1em 0;
-    border-radius: 0.25rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
-
-/* Navigation improvements */
+/* ---- NAVBAR ---- */
 .navbar {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background: rgba(10, 20, 35, 0.92) !important;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(80,140,255,0.35);
+}
+.navbar-brand, 
+.navbar-nav .nav-link {
+  color: #cfe0ff !important;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+.navbar-nav .nav-link:hover {
+  color: #66aaff !important;
 }
 
-/* Enhance headings */
-h1, h2, h3 {
-    margin-top: 1.5em;
-    margin-bottom: 0.75em;
+/* ---- HEADINGS (Default font, no glow) ---- */
+h1, h2, h3, h4 {
+  font-family: system-ui, sans-serif !important;
+  font-weight: 700;
+  color: #82baff;
+  letter-spacing: 0.5px;
+  margin-top: 1.2rem;
+  text-shadow: none !important;
 }
 
-h1 {
-    border-bottom: 2px solid #dee2e6;
-    padding-bottom: 0.3em;
+/* ---- BODY TEXT ---- */
+p, li {
+  color: #e1e9f7;
+  font-size: 0.97rem;
+  letter-spacing: 0.1px;
+}
+strong {
+  color: #a8c9ff;
 }
 
-/* Style for question sections */
-.question-section {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    margin: 2em 0;
+/* ---- LINKS ---- */
+a {
+  color: #7eb8ff;
+}
+a:hover {
+  color: #bcd8ff;
+}
+
+/* ---- HORIZONTAL LINE ---- */
+hr {
+  border: none;
+  height: 1px;
+  margin: 1.6rem 0;
+  background: linear-gradient(to right, #274872, #6eaaff, #274872);
+}
+
+/* =====================================================
+   FIX INLINE CODE (Remove blue pill around brackets)
+   ===================================================== */
+code:not(pre code) {
+  background: none !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  font-family: inherit !important;
+}
+
+/* =====================================================
+   CALLOUT FIX — Make it readable & clean
+   ===================================================== */
+.callout {
+  background: rgba(20, 32, 50, 0.95) !important;
+  color: #e8f0ff !important;
+  border-left: 4px solid #4fa4ff !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 60, 160, 0.35);
+}
+
+/* Callout title */
+.callout .callout-title {
+  background: rgba(36, 55, 85, 0.98) !important;
+  color: #d2e6ff !important;
+  font-weight: 600;
+  font-size: 0.96rem !important;
+  padding: 0.55rem 0.8rem !important;
+}
+
+/* Callout icon */
+.callout .callout-icon {
+  color: #9acaff !important;
+}
+
+/* Callout text */
+.callout p,
+.callout li {
+  color: #e6efff !important;
+  font-size: 0.95rem !important;
+}
+
+/* Remove Quarto's default gray */
+.callout.callout-style-default {
+  background-color: transparent !important;
+}
+
+/* =====================================================
+   CODE BLOCKS
+   ===================================================== */
+pre, code {
+  background: #0e1828 !important;
+  border-left: 3px solid #4d8bff;
+  color: #d3e4ff !important;
+  border-radius: 6px;
+  padding: 0.65em 1em;
+  font-size: 0.9rem;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* =====================================================
+   TABLES
+   ===================================================== */
+table {
+  background: rgba(18, 30, 48, 0.85);
+  border-radius: 8px;
+  color: #d6e6ff;
+  font-size: 0.92rem;
+}
+table th {
+  background-color: #1a2f4d;
+  color: #a7cbff;
+  font-weight: 600;
+}
+
+/* =====================================================
+   FIGURES
+   ===================================================== */
+.quarto-figure img {
+  border-radius: 10px;
+  border: 1px solid rgba(100,150,255,0.35);
+  box-shadow: 0 3px 10px rgba(0, 50, 140, 0.35);
+}
+
+/* =====================================================
+   CUSTOM CARDS
+   ===================================================== */
+.custom-card {
+  background: rgba(18, 30, 48, 0.78);
+  border: 1px solid rgba(100,150,255,0.35);
+  padding: 1.2rem;
+  border-radius: 12px;
+  margin: 1.2rem 0;
+  box-shadow: 0 3px 10px rgba(0, 60, 160, 0.25);
 }
